@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Make the inner workings of a CNN visible and understandable -- users should see what happens at each layer when classifying a digit.
-**Current focus:** Phase 4: CNN Visualization -- IN PROGRESS (2/3 plans with summary)
+**Current focus:** Phase 4: CNN Visualization -- COMPLETE (3/3 plans with summary)
 
 ## Current Position
 
 Phase: 4 of 4 (CNN Visualization)
-Plan: 2 of 3 in current phase -- COMPLETE
-Status: Executing Phase 04 plans
-Last activity: 2026-03-10 -- Completed 04-01-PLAN.md
+Plan: 3 of 3 in current phase -- COMPLETE
+Status: All phases complete
+Last activity: 2026-03-10 -- Completed 04-03-PLAN.md
 
-Progress: [#########-] 89% (Phase 4: 2/3 plans with summary)
+Progress: [##########] 100% (Phase 4: 3/3 plans with summary)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 6 min
-- Total execution time: 0.60 hours
+- Total plans completed: 8
+- Average duration: 5 min
+- Total execution time: 0.63 hours
 
 **By Phase:**
 
@@ -30,10 +30,10 @@ Progress: [#########-] 89% (Phase 4: 2/3 plans with summary)
 | 01-model-training-notebook | 1 | 11 min | 11 min |
 | 02-backend-api | 2 | 4 min | 2 min |
 | 03-frontend-image-selection | 2 | 15 min | 8 min |
-| 04-cnn-visualization | 2 | 6 min | 3 min |
+| 04-cnn-visualization | 3 | 8 min | 3 min |
 
 **Recent Trend:**
-- Last 5 plans: 2 min, 11 min, 4 min, 2 min, 4 min
+- Last 5 plans: 11 min, 4 min, 2 min, 4 min, 2 min
 - Trend: stable
 
 *Updated after each plan completion*
@@ -61,6 +61,7 @@ Recent decisions affecting current work:
 - Phase 4: Used ResponsiveContainer with explicit height div to prevent Recharts 0-height collapse
 - Phase 4: Inline SVG with viewBox for architecture diagram (no extra dependency needed)
 - Phase 4: Generated viridis LUT from embedded data (matplotlib not in conda env), output matches canonical values
+- [Phase 04-cnn-visualization]: Rendered ConfidenceChart as page.js sibling (not inside PredictionSection) to avoid double card wrapping
 
 ### Pending Todos
 
@@ -75,5 +76,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-10
-Stopped at: Completed 04-01-PLAN.md
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
