@@ -15,9 +15,9 @@ Requirements for initial release. Each maps to roadmap phases.
 ### CNN Inference
 
 - [ ] **INF-01**: FastAPI endpoint accepts an MNIST image and returns the predicted digit
-- [ ] **INF-02**: Backend returns intermediate layer activations (feature maps) for all conv layers
-- [ ] **INF-03**: Backend returns softmax confidence scores for all 10 digits (0-9)
-- [ ] **INF-04**: CNN model loaded once at server startup (not per-request)
+- [x] **INF-02**: Backend returns intermediate layer activations (feature maps) for all conv layers
+- [x] **INF-03**: Backend returns softmax confidence scores for all 10 digits (0-9)
+- [x] **INF-04**: CNN model loaded once at server startup (not per-request)
 
 ### Visualization
 
@@ -44,9 +44,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Backend Setup
 
-- [ ] **BE-01**: Python 3.12 virtual environment (not system Python 3.14)
+- [x] **BE-01**: Python 3.12 virtual environment (not system Python 3.14)
 - [ ] **BE-02**: FastAPI with CORS configured for Next.js frontend
-- [ ] **BE-03**: Multi-output Keras model for single-pass activation extraction
+- [x] **BE-03**: Multi-output Keras model for single-pass activation extraction
 
 ## v2 Requirements
 
@@ -85,9 +85,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | IMG-01 | Phase 3 | Pending |
 | IMG-02 | Phase 3 | Pending |
 | INF-01 | Phase 2 | Pending |
-| INF-02 | Phase 2 | Pending |
-| INF-03 | Phase 2 | Pending |
-| INF-04 | Phase 2 | Pending |
+| INF-02 | Phase 2 | Complete |
+| INF-03 | Phase 2 | Complete |
+| INF-04 | Phase 2 | Complete |
 | VIS-01 | Phase 4 | Pending |
 | VIS-02 | Phase 4 | Pending |
 | VIS-03 | Phase 4 | Pending |
@@ -102,9 +102,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | EDU-04 | Phase 1 | Complete |
 | EDU-05 | Phase 1 | Complete |
 | EDU-06 | Phase 1 | Complete |
-| BE-01 | Phase 2 | Pending |
+| BE-01 | Phase 2 | Complete |
 | BE-02 | Phase 2 | Pending |
-| BE-03 | Phase 2 | Pending |
+| BE-03 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 23 total

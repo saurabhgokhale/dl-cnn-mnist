@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Make the inner workings of a CNN visible and understandable -- users should see what happens at each layer when classifying a digit.
-**Current focus:** Phase 1: Model Training & Notebook -- COMPLETE
+**Current focus:** Phase 2: Backend API -- Plan 1 of 2 COMPLETE
 
 ## Current Position
 
-Phase: 1 of 4 (Model Training & Notebook)
-Plan: 1 of 1 in current phase (COMPLETE)
-Status: Phase 1 complete, ready for Phase 2
-Last activity: 2026-03-09 -- Completed 01-01-PLAN.md
+Phase: 2 of 4 (Backend API)
+Plan: 2 of 2 in current phase
+Status: Plan 02-01 complete, ready for Plan 02-02
+Last activity: 2026-03-09 -- Completed 02-01-PLAN.md
 
-Progress: [##########] 100% (Phase 1)
+Progress: [#####-----] 50% (Phase 2: 1/2 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 11 min
-- Total execution time: 0.18 hours
+- Total plans completed: 2
+- Average duration: 7 min
+- Total execution time: 0.22 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-model-training-notebook | 1 | 11 min | 11 min |
+| 02-backend-api | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 11 min
-- Trend: baseline
+- Last 5 plans: 11 min, 2 min
+- Trend: improving
 
 *Updated after each plan completion*
 
@@ -49,6 +50,8 @@ Recent decisions affecting current work:
 - Phase 1: Used conda env (ml, Python 3.9, TF 2.19.0) due to proxy blocking PyPI
 - Phase 1: Activation extraction uses Functional API rebuild pattern for Keras 3 compatibility
 - Phase 1: Model saved as .h5 format per spec (462.5 KB, 35,298 params, 98.7% accuracy)
+- Phase 2: PIL grayscale mode 'L' for activation maps (10x smaller than matplotlib colormap)
+- Phase 2: Inference module separates ML concerns from HTTP concerns for Plan 02
 
 ### Pending Todos
 
@@ -63,5 +66,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-09
-Stopped at: Completed 01-01-PLAN.md
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None
