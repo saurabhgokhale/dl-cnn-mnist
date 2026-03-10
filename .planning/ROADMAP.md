@@ -56,10 +56,11 @@ Plans:
   1. Next.js app runs with Tailwind CSS styling and Montserrat font applied globally
   2. User can click a button to fetch and display a random MNIST image (28x28 scaled up) from the backend
   3. Page has a clean, educational layout with visually distinct sections for input, visualization, and prediction output
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — Backend digit query param + Next.js scaffolding with Tailwind and Montserrat font
+- [ ] 03-02-PLAN.md — UI components, page assembly, API integration, and visual verification
 
 ### Phase 4: CNN Visualization
 **Goal**: Users see the full CNN story -- activations flowing through layers, confidence scores, and network architecture -- making the inner workings of the CNN visible and understandable
@@ -84,5 +85,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 |-------|----------------|--------|-----------|
 | 1. Model Training & Notebook | 0/1 | Planned | - |
 | 2. Backend API | 0/2 | Planned | - |
-| 3. Frontend & Image Selection | 0/0 | Not started | - |
+| 3. Frontend & Image Selection | 0/2 | Planned | - |
 | 4. CNN Visualization | 0/0 | Not started | - |
