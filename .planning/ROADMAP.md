@@ -71,10 +71,12 @@ Plans:
   2. A confidence bar chart shows prediction probabilities for all 10 digits (0-9) with the predicted digit highlighted
   3. A network architecture diagram shows the CNN layer structure so users understand the model topology
   4. A loading state is visible while inference is running, and an error state appears if the backend is unreachable
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — Viridis colormap LUT and activation heatmap component with Canvas-based colormapping
+- [ ] 04-02-PLAN.md — Confidence bar chart (Recharts) and CNN architecture diagram (inline SVG)
+- [ ] 04-03-PLAN.md — Integration: wire components into page, skeleton loaders, error states, visual verification
 
 ## Progress
 
@@ -86,4 +88,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | 1. Model Training & Notebook | 0/1 | Planned | - |
 | 2. Backend API | 0/2 | Planned | - |
 | 3. Frontend & Image Selection | 0/2 | Planned | - |
-| 4. CNN Visualization | 0/0 | Not started | - |
+| 4. CNN Visualization | 0/3 | Not started | - |
