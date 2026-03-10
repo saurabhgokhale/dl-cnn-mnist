@@ -9,8 +9,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Image Input
 
-- [ ] **IMG-01**: User can click a button to select a random MNIST image from the dataset
-- [ ] **IMG-02**: Selected image is displayed clearly (28x28 scaled up) on the page
+- [x] **IMG-01**: User can click a button to select a random MNIST image from the dataset
+- [x] **IMG-02**: Selected image is displayed clearly (28x28 scaled up) on the page
 
 ### CNN Inference
 
@@ -31,7 +31,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **FE-01**: Next.js app (JavaScript only, no TypeScript) with Tailwind CSS
 - [x] **FE-02**: Google Font Montserrat applied globally
-- [ ] **FE-03**: Clean, educational layout with clear section separation
+- [x] **FE-03**: Clean, educational layout with clear section separation
 
 ### Training & Education
 
@@ -82,8 +82,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| IMG-01 | Phase 3 | Pending |
-| IMG-02 | Phase 3 | Pending |
+| IMG-01 | Phase 3 | Complete |
+| IMG-02 | Phase 3 | Complete |
 | INF-01 | Phase 2 | Complete |
 | INF-02 | Phase 2 | Complete |
 | INF-03 | Phase 2 | Complete |
@@ -95,7 +95,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VIS-05 | Phase 4 | Pending |
 | FE-01 | Phase 3 | Complete |
 | FE-02 | Phase 3 | Complete |
-| FE-03 | Phase 3 | Pending |
+| FE-03 | Phase 3 | Complete |
 | EDU-01 | Phase 1 | Complete |
 | EDU-02 | Phase 1 | Complete |
 | EDU-03 | Phase 1 | Complete |
