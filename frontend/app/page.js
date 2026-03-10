@@ -7,6 +7,7 @@ import PredictionSection from "./components/PredictionSection";
 import ConfidenceChart from "./components/ConfidenceChart";
 import ArchitectureDiagram from "./components/ArchitectureDiagram";
 import ActivationHeatmaps from "./components/ActivationHeatmaps";
+import WeightsSection from "./components/WeightsSection";
 import { SkeletonHeatmapGrid, SkeletonBarChart } from "./components/SkeletonLoaders";
 
 const API_BASE =
@@ -16,6 +17,7 @@ export default function Home() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [weights, setWeights] = useState(null);
 
   const fetchDigit = useCallback(async (digit = null) => {
     setLoading(true);
@@ -45,10 +47,17 @@ export default function Home() {
 
   useEffect(() => {
     fetchDigit();
+    // Fetch weights once (static, doesn't change per image)
+    fetch(`${API_BASE}/api/weights`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) setWeights(data.weights);
+      })
+      .catch(() => {}); // weights are optional, don't block on failure
   }, [fetchDigit]);
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8 flex flex-col gap-6">
+    <main className="max-w-7xl mx-auto px-2 sm:px-4 py-8 flex flex-col gap-6">
       <Header />
 
       {error && (
@@ -63,17 +72,21 @@ export default function Home() {
         </div>
       )}
 
-      <ImageSection
-        result={result}
-        loading={loading}
-        onFetchDigit={(d) => fetchDigit(d)}
-        onFetchRandom={() => fetchDigit()}
-      />
+      {/* Row 1: Input Image (left) + Prediction (right) */}
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-start">
+        <ImageSection
+          result={result}
+          loading={loading}
+          onFetchDigit={(d) => fetchDigit(d)}
+          onFetchRandom={() => fetchDigit()}
+        />
+        <PredictionSection result={result} loading={loading} />
+      </div>
 
+      {/* Row 2: Architecture (full width) */}
       <ArchitectureDiagram />
 
-      <PredictionSection result={result} loading={loading} />
-
+      {/* Row 3: Confidence (full width) */}
       {loading && !result ? (
         <SkeletonBarChart />
       ) : result ? (
@@ -81,8 +94,11 @@ export default function Home() {
           confidence={result.confidence}
           prediction={result.prediction}
         />
-      ) : null}
+      ) : (
+        <ConfidenceChart confidence={null} prediction={null} />
+      )}
 
+      {/* Layer-by-layer activations (full width) */}
       {loading && !result ? (
         <SkeletonHeatmapGrid />
       ) : loading && result ? (
@@ -96,6 +112,8 @@ export default function Home() {
           </p>
         </section>
       ) : null}
+
+      <WeightsSection weights={weights} />
     </main>
   );
 }

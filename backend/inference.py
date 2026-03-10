@@ -27,8 +27,8 @@ def load_model_and_data(
     """Load CNN model and MNIST test data, build multi-output activation model.
 
     Args:
-        model_path: Path to the trained .h5 model file.
-            Defaults to <project_root>/model/mnist_cnn.h5.
+        model_path: Path to the trained .keras model file.
+            Defaults to <project_root>/model/mnist_cnn.keras.
         data_path: Path to the Nielsen MNIST pickle file.
             Defaults to ~/Downloads/mnist.pkl.gz.
 
@@ -40,7 +40,7 @@ def load_model_and_data(
             test_labels: np.ndarray shape (10000,) int
     """
     if model_path is None:
-        model_path = str(_PROJECT_ROOT / "model" / "mnist_cnn.h5")
+        model_path = str(_PROJECT_ROOT / "model" / "mnist_cnn.keras")
     if data_path is None:
         data_path = str(Path.home() / "Downloads" / "mnist.pkl.gz")
 
@@ -48,7 +48,7 @@ def load_model_and_data(
     model = keras.models.load_model(model_path, compile=False)
 
     # Build multi-output activation model using Functional API rebuild pattern.
-    # Keras 3 Sequential models loaded from .h5 don't expose .input directly,
+    # Keras 3 Sequential models loaded from .keras don't expose .input directly,
     # so we rewire through a fresh Input tensor.
     inp = keras.Input(shape=(28, 28, 1))
     x = inp
@@ -144,31 +144,129 @@ def run_inference(
         for i in range(10)
     ]
 
-    # Activation maps for conv layers only
+    # Activations for all interesting layers
+    skip_prefixes = ("flatten", "dropout")
     activations = []
     for layer_idx, name in enumerate(layer_names):
-        if "conv" not in name:
+        if any(name.startswith(s) for s in skip_prefixes):
             continue
 
-        layer_output = results[layer_idx][0]  # shape (H, W, filters)
-        h, w, num_filters = layer_output.shape
+        layer_output = results[layer_idx][0]
 
-        maps = []
-        for f in range(num_filters):
-            b64 = activation_to_base64(layer_output[:, :, f])
-            maps.append(b64)
-
-        activations.append({
-            "layer_name": name,
-            "shape": [int(h), int(w), int(num_filters)],
-            "maps": maps,
-        })
+        if len(layer_output.shape) == 3:
+            # 3D output: (H, W, filters) -- conv and pool layers
+            h, w, num_filters = layer_output.shape
+            maps = []
+            for f in range(num_filters):
+                b64 = activation_to_base64(layer_output[:, :, f])
+                maps.append(b64)
+            activations.append({
+                "layer_name": name,
+                "type": "feature_map",
+                "shape": [int(h), int(w), int(num_filters)],
+                "maps": maps,
+            })
+        elif len(layer_output.shape) == 1:
+            # 1D output: (units,) -- dense layers
+            activations.append({
+                "layer_name": name,
+                "type": "vector",
+                "shape": [int(layer_output.shape[0])],
+                "values": [round(float(v), 4) for v in layer_output],
+            })
 
     return {
         "prediction": predicted_digit,
         "confidence": confidence,
         "activations": activations,
     }
+
+
+def weight_to_base64(weight_map: np.ndarray, size: int = 32) -> str:
+    """Convert a 2D weight array to a base64-encoded PNG string.
+
+    Normalizes to 0-255 range. Used for conv filter visualization.
+    """
+    a = weight_map
+    a_min, a_max = a.min(), a.max()
+    if a_max - a_min > 1e-8:
+        normalized = ((a - a_min) / (a_max - a_min) * 255).astype(np.uint8)
+    else:
+        normalized = np.full_like(a, 128, dtype=np.uint8)
+    img = Image.fromarray(normalized, mode="L")
+    img = img.resize((size, size), Image.NEAREST)
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
+
+
+def weight_matrix_to_base64(matrix: np.ndarray) -> str:
+    """Convert a 2D weight matrix to a base64-encoded PNG heatmap.
+
+    Output image has the same pixel dimensions as the matrix.
+    Frontend can scale for display.
+    """
+    a = matrix
+    a_min, a_max = a.min(), a.max()
+    if a_max - a_min > 1e-8:
+        normalized = ((a - a_min) / (a_max - a_min) * 255).astype(np.uint8)
+    else:
+        normalized = np.full_like(a, 128, dtype=np.uint8)
+    img = Image.fromarray(normalized, mode="L")
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
+
+
+def get_model_weights(activation_model) -> list:
+    """Extract weights from all trainable layers for visualization.
+
+    Returns a list of dicts, each with layer name, type, shape info,
+    and base64-encoded weight visualizations.
+    """
+    weights = []
+    for layer in activation_model.layers:
+        layer_weights = layer.get_weights()
+        if not layer_weights:
+            continue
+
+        name = layer.name
+        w = layer_weights[0]
+        b = layer_weights[1] if len(layer_weights) > 1 else None
+
+        if "conv" in name:
+            # Conv weights shape: (H, W, C_in, C_out)
+            h, w_dim, c_in, c_out = w.shape
+            filters = []
+            for f in range(c_out):
+                if c_in == 1:
+                    filter_data = w[:, :, 0, f]
+                else:
+                    # Average across input channels for display
+                    filter_data = np.mean(w[:, :, :, f], axis=2)
+                filters.append(weight_to_base64(filter_data))
+
+            weights.append({
+                "layer_name": name,
+                "type": "conv_filters",
+                "filter_shape": [int(h), int(w_dim), int(c_in)],
+                "num_filters": int(c_out),
+                "filters": filters,
+                "biases": [round(float(v), 4) for v in b] if b is not None else [],
+            })
+
+        elif len(w.shape) == 2:
+            # Dense weights shape: (in_features, out_features)
+            matrix_b64 = weight_matrix_to_base64(w)
+            weights.append({
+                "layer_name": name,
+                "type": "dense_matrix",
+                "shape": [int(w.shape[0]), int(w.shape[1])],
+                "matrix": matrix_b64,
+                "biases": [round(float(v), 4) for v in b] if b is not None else [],
+            })
+
+    return weights
 
 
 def image_to_base64(image: np.ndarray, size: int = 112) -> str:

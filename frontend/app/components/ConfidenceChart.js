@@ -30,11 +30,11 @@ export default function ConfidenceChart({ confidence, prediction }) {
   return (
     <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-semibold mb-4">Confidence</h2>
-      <div className="h-[280px]">
-        <ResponsiveContainer width="100%" height={280}>
+      <div className="h-[250px]">
+        <ResponsiveContainer width="100%" height={250}>
           <BarChart
             data={data}
-            margin={{ top: 20, right: 10, left: 10, bottom: 5 }}
+            margin={{ top: 20, right: 5, left: 5, bottom: 5 }}
           >
             <XAxis
               dataKey="digit"
