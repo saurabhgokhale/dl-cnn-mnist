@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Make the inner workings of a CNN visible and understandable -- users should see what happens at each layer when classifying a digit.
-**Current focus:** Phase 3: Frontend Image Selection -- COMPLETE (2/2 plans)
+**Current focus:** Phase 4: CNN Visualization -- IN PROGRESS (1/3 plans with summary)
 
 ## Current Position
 
-Phase: 3 of 4 (Frontend Image Selection)
-Plan: 2 of 2 in current phase -- COMPLETE
-Status: Phase 03 complete, ready for Phase 04
-Last activity: 2026-03-10 -- Completed 03-02-PLAN.md
+Phase: 4 of 4 (CNN Visualization)
+Plan: 2 of 3 in current phase -- COMPLETE
+Status: Executing Phase 04 plans
+Last activity: 2026-03-10 -- Completed 04-02-PLAN.md
 
-Progress: [########--] 75% (Phase 3: 2/2 plans)
+Progress: [########=-] 83% (Phase 4: 1/3 plans with summary)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
+- Total plans completed: 6
 - Average duration: 6 min
-- Total execution time: 0.50 hours
+- Total execution time: 0.53 hours
 
 **By Phase:**
 
@@ -30,9 +30,10 @@ Progress: [########--] 75% (Phase 3: 2/2 plans)
 | 01-model-training-notebook | 1 | 11 min | 11 min |
 | 02-backend-api | 2 | 4 min | 2 min |
 | 03-frontend-image-selection | 2 | 15 min | 8 min |
+| 04-cnn-visualization | 1 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 11 min, 2 min, 2 min, 11 min, 4 min
+- Last 5 plans: 2 min, 2 min, 11 min, 4 min, 2 min
 - Trend: stable
 
 *Updated after each plan completion*
@@ -57,6 +58,8 @@ Recent decisions affecting current work:
 - Phase 3: Used next/font/local with bundled woff2 instead of next/font/google (sandbox blocks Google Fonts)
 - Phase 3: Optional[int] syntax for Python 3.9 compat in backend digit query param
 - Phase 3: Used result.confidence[prediction].probability to match backend response shape (not .score)
+- Phase 4: Used ResponsiveContainer with explicit height div to prevent Recharts 0-height collapse
+- Phase 4: Inline SVG with viewBox for architecture diagram (no extra dependency needed)
 
 ### Pending Todos
 
@@ -71,5 +74,5 @@ None.
 ## Session Continuity
 
 Last session: 2026-03-10
-Stopped at: Completed 03-02-PLAN.md (Phase 03 complete)
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
