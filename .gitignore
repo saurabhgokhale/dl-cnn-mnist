@@ -2,3 +2,9 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Frontend
+node_modules/
+.next/
+frontend/.next/
+frontend/node_modules/
