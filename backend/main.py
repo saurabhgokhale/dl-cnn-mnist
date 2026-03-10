@@ -8,9 +8,10 @@ random image prediction with activation map extraction.
 
 import random
 from contextlib import asynccontextmanager
+from typing import Optional
 
 import uvicorn
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
 
 from backend.inference import image_to_base64, load_model_and_data, run_inference
@@ -49,11 +50,16 @@ async def health(request: Request):
 
 
 @app.get("/api/random-predict")
-async def random_predict(request: Request):
+async def random_predict(
+    request: Request,
+    digit: Optional[int] = Query(None, ge=0, le=9),
+):
     """Pick a random MNIST test image, run inference, return everything.
 
     Returns JSON with: image (base64 PNG), true_label, prediction,
     confidence (10 dicts sorted by digit), activations (conv layer maps).
+
+    If ?digit=N is provided, only images with that true label are considered.
     """
     test_images = request.app.state.test_images
     test_labels = request.app.state.test_labels
@@ -61,7 +67,11 @@ async def random_predict(request: Request):
     layer_names = request.app.state.layer_names
 
     # Pick random test image (keep batch dimension)
-    idx = random.randint(0, len(test_images) - 1)
+    if digit is not None:
+        matching = [i for i, lbl in enumerate(test_labels) if int(lbl) == digit]
+        idx = random.choice(matching)
+    else:
+        idx = random.randint(0, len(test_images) - 1)
     image = test_images[idx : idx + 1]
     true_label = int(test_labels[idx])
 
