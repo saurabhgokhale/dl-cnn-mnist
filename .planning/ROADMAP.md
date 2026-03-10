@@ -28,10 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Notebook clearly demonstrates data loading from mnist.pkl.gz, preprocessing, model definition, training with validation, and test evaluation
   3. Notebook displays scikit-learn confusion matrix and classification report on test data
   4. Trained model achieves reasonable accuracy (>95%) on MNIST test set
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Set up environment, create complete training notebook, execute and verify outputs
 
 ### Phase 2: Backend API
 **Goal**: A running FastAPI server that accepts an MNIST image, returns the predicted digit, confidence scores, and intermediate layer activations -- verifiable via curl before any frontend exists
@@ -81,7 +81,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Model Training & Notebook | 0/0 | Not started | - |
+| 1. Model Training & Notebook | 0/1 | Planned | - |
 | 2. Backend API | 0/0 | Not started | - |
 | 3. Frontend & Image Selection | 0/0 | Not started | - |
 | 4. CNN Visualization | 0/0 | Not started | - |
