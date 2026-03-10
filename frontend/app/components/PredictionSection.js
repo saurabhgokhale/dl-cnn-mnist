@@ -1,9 +1,14 @@
-export default function PredictionSection({ result }) {
+export default function PredictionSection({ result, loading }) {
   return (
     <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-semibold mb-4">Prediction</h2>
 
-      {result ? (
+      {loading && !result ? (
+        <div>
+          <div className="h-10 w-16 bg-gray-200 rounded animate-pulse" />
+          <div className="h-4 w-32 bg-gray-200 rounded animate-pulse mt-2" />
+        </div>
+      ) : result ? (
         <div>
           <p className="text-4xl font-bold text-accent-600">
             {result.prediction}

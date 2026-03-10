@@ -4,7 +4,10 @@ import { useState, useEffect, useCallback } from "react";
 import Header from "./components/Header";
 import ImageSection from "./components/ImageSection";
 import PredictionSection from "./components/PredictionSection";
-import ActivationsPlaceholder from "./components/ActivationsPlaceholder";
+import ConfidenceChart from "./components/ConfidenceChart";
+import ArchitectureDiagram from "./components/ArchitectureDiagram";
+import ActivationHeatmaps from "./components/ActivationHeatmaps";
+import { SkeletonHeatmapGrid, SkeletonBarChart } from "./components/SkeletonLoaders";
 
 const API_BASE =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -67,9 +70,32 @@ export default function Home() {
         onFetchRandom={() => fetchDigit()}
       />
 
-      <PredictionSection result={result} />
+      <ArchitectureDiagram />
 
-      <ActivationsPlaceholder />
+      <PredictionSection result={result} loading={loading} />
+
+      {loading && !result ? (
+        <SkeletonBarChart />
+      ) : result ? (
+        <ConfidenceChart
+          confidence={result.confidence}
+          prediction={result.prediction}
+        />
+      ) : null}
+
+      {loading && !result ? (
+        <SkeletonHeatmapGrid />
+      ) : loading && result ? (
+        <ActivationHeatmaps activations={result.activations} />
+      ) : result && result.activations ? (
+        <ActivationHeatmaps activations={result.activations} />
+      ) : error && !result ? (
+        <section className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
+          <p className="text-gray-400 font-medium">
+            Could not load layer activations
+          </p>
+        </section>
+      ) : null}
     </main>
   );
 }
