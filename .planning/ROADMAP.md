@@ -42,10 +42,11 @@ Plans:
   2. API endpoint accepts image data and returns predicted digit, softmax confidence scores for all 10 digits, and base64-encoded activation maps for each conv layer
   3. CORS is configured so the Next.js frontend on a different port can call the API without errors
   4. Server runs in a Python 3.12 virtual environment with all dependencies installed
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — ML inference module: model loading, activation extraction, base64 encoding
+- [ ] 02-02-PLAN.md — FastAPI server: lifespan, CORS, endpoints, curl verification
 
 ### Phase 3: Frontend & Image Selection
 **Goal**: Users see a clean educational interface where they can pick a random MNIST digit and see it displayed, with the app ready to connect to the backend
@@ -82,6 +83,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Model Training & Notebook | 0/1 | Planned | - |
-| 2. Backend API | 0/0 | Not started | - |
+| 2. Backend API | 0/2 | Planned | - |
 | 3. Frontend & Image Selection | 0/0 | Not started | - |
 | 4. CNN Visualization | 0/0 | Not started | - |
