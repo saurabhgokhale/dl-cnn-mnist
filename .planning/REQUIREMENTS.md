@@ -21,7 +21,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Visualization
 
-- [ ] **VIS-01**: Layer activation heatmaps displayed as 2D grids for each conv layer
+- [x] **VIS-01**: Layer activation heatmaps displayed as 2D grids for each conv layer
 - [x] **VIS-02**: Confidence bar chart showing prediction probabilities for all 10 digits
 - [x] **VIS-03**: Network architecture diagram showing CNN layer structure
 - [ ] **VIS-04**: Loading state while inference is running
@@ -88,7 +88,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INF-02 | Phase 2 | Complete |
 | INF-03 | Phase 2 | Complete |
 | INF-04 | Phase 2 | Complete |
-| VIS-01 | Phase 4 | Pending |
+| VIS-01 | Phase 4 | Complete |
 | VIS-02 | Phase 4 | Complete |
 | VIS-03 | Phase 4 | Complete |
 | VIS-04 | Phase 4 | Pending |
