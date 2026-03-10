@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-09)
 
 **Core value:** Make the inner workings of a CNN visible and understandable -- users should see what happens at each layer when classifying a digit.
-**Current focus:** Phase 2: Backend API -- COMPLETE (2/2 plans)
+**Current focus:** Phase 3: Frontend Image Selection -- IN PROGRESS (1/2 plans)
 
 ## Current Position
 
-Phase: 2 of 4 (Backend API) -- COMPLETE
-Plan: 2 of 2 in current phase -- COMPLETE
-Status: Phase 02 complete, ready for Phase 03
-Last activity: 2026-03-09 -- Completed 02-02-PLAN.md
+Phase: 3 of 4 (Frontend Image Selection)
+Plan: 1 of 2 in current phase -- COMPLETE
+Status: Executing Phase 03, Plan 01 complete
+Last activity: 2026-03-10 -- Completed 03-01-PLAN.md
 
-Progress: [#####-----] 50% (Phase 2: 2/2 plans)
+Progress: [######----] 62% (Phase 3: 1/2 plans)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 5 min
-- Total execution time: 0.25 hours
+- Total plans completed: 4
+- Average duration: 6 min
+- Total execution time: 0.43 hours
 
 **By Phase:**
 
@@ -29,10 +29,11 @@ Progress: [#####-----] 50% (Phase 2: 2/2 plans)
 |-------|-------|-------|----------|
 | 01-model-training-notebook | 1 | 11 min | 11 min |
 | 02-backend-api | 2 | 4 min | 2 min |
+| 03-frontend-image-selection | 1 | 11 min | 11 min |
 
 **Recent Trend:**
-- Last 5 plans: 11 min, 2 min, 2 min
-- Trend: improving
+- Last 5 plans: 11 min, 2 min, 2 min, 11 min
+- Trend: stable
 
 *Updated after each plan completion*
 
@@ -53,6 +54,8 @@ Recent decisions affecting current work:
 - Phase 2: PIL grayscale mode 'L' for activation maps (10x smaller than matplotlib colormap)
 - Phase 2: Inference module separates ML concerns from HTTP concerns for Plan 02
 - Phase 2: FastAPI lifespan pattern for one-time model loading, single /api/random-predict endpoint
+- Phase 3: Used next/font/local with bundled woff2 instead of next/font/google (sandbox blocks Google Fonts)
+- Phase 3: Optional[int] syntax for Python 3.9 compat in backend digit query param
 
 ### Pending Todos
 
@@ -66,6 +69,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-03-09
-Stopped at: Completed 02-02-PLAN.md (Phase 02 complete)
+Last session: 2026-03-10
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

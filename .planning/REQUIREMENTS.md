@@ -29,8 +29,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Frontend
 
-- [ ] **FE-01**: Next.js app (JavaScript only, no TypeScript) with Tailwind CSS
-- [ ] **FE-02**: Google Font Montserrat applied globally
+- [x] **FE-01**: Next.js app (JavaScript only, no TypeScript) with Tailwind CSS
+- [x] **FE-02**: Google Font Montserrat applied globally
 - [ ] **FE-03**: Clean, educational layout with clear section separation
 
 ### Training & Education
@@ -93,8 +93,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VIS-03 | Phase 4 | Pending |
 | VIS-04 | Phase 4 | Pending |
 | VIS-05 | Phase 4 | Pending |
-| FE-01 | Phase 3 | Pending |
-| FE-02 | Phase 3 | Pending |
+| FE-01 | Phase 3 | Complete |
+| FE-02 | Phase 3 | Complete |
 | FE-03 | Phase 3 | Pending |
 | EDU-01 | Phase 1 | Complete |
 | EDU-02 | Phase 1 | Complete |
