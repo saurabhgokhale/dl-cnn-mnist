@@ -35,12 +35,12 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Training & Education
 
-- [ ] **EDU-01**: Jupyter notebook that trains the CNN using TensorFlow and Keras
-- [ ] **EDU-02**: Notebook covers data loading from /Users/saurabh/Downloads/mnist.pkl.gz
-- [ ] **EDU-03**: Notebook covers preprocessing, model architecture definition, and compilation
-- [ ] **EDU-04**: Notebook covers training with validation metrics
-- [ ] **EDU-05**: Notebook covers test evaluation with scikit-learn metrics (confusion matrix, classification report)
-- [ ] **EDU-06**: Notebook produces .h5 model file used by the backend
+- [x] **EDU-01**: Jupyter notebook that trains the CNN using TensorFlow and Keras
+- [x] **EDU-02**: Notebook covers data loading from /Users/saurabh/Downloads/mnist.pkl.gz
+- [x] **EDU-03**: Notebook covers preprocessing, model architecture definition, and compilation
+- [x] **EDU-04**: Notebook covers training with validation metrics
+- [x] **EDU-05**: Notebook covers test evaluation with scikit-learn metrics (confusion matrix, classification report)
+- [x] **EDU-06**: Notebook produces .h5 model file used by the backend
 
 ### Backend Setup
 
@@ -96,12 +96,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FE-01 | Phase 3 | Pending |
 | FE-02 | Phase 3 | Pending |
 | FE-03 | Phase 3 | Pending |
-| EDU-01 | Phase 1 | Pending |
-| EDU-02 | Phase 1 | Pending |
-| EDU-03 | Phase 1 | Pending |
-| EDU-04 | Phase 1 | Pending |
-| EDU-05 | Phase 1 | Pending |
-| EDU-06 | Phase 1 | Pending |
+| EDU-01 | Phase 1 | Complete |
+| EDU-02 | Phase 1 | Complete |
+| EDU-03 | Phase 1 | Complete |
+| EDU-04 | Phase 1 | Complete |
+| EDU-05 | Phase 1 | Complete |
+| EDU-06 | Phase 1 | Complete |
 | BE-01 | Phase 2 | Pending |
 | BE-02 | Phase 2 | Pending |
 | BE-03 | Phase 2 | Pending |
