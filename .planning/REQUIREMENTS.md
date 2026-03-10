@@ -82,35 +82,35 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| IMG-01 | TBD | Pending |
-| IMG-02 | TBD | Pending |
-| INF-01 | TBD | Pending |
-| INF-02 | TBD | Pending |
-| INF-03 | TBD | Pending |
-| INF-04 | TBD | Pending |
-| VIS-01 | TBD | Pending |
-| VIS-02 | TBD | Pending |
-| VIS-03 | TBD | Pending |
-| VIS-04 | TBD | Pending |
-| VIS-05 | TBD | Pending |
-| FE-01 | TBD | Pending |
-| FE-02 | TBD | Pending |
-| FE-03 | TBD | Pending |
-| EDU-01 | TBD | Pending |
-| EDU-02 | TBD | Pending |
-| EDU-03 | TBD | Pending |
-| EDU-04 | TBD | Pending |
-| EDU-05 | TBD | Pending |
-| EDU-06 | TBD | Pending |
-| BE-01 | TBD | Pending |
-| BE-02 | TBD | Pending |
-| BE-03 | TBD | Pending |
+| IMG-01 | Phase 3 | Pending |
+| IMG-02 | Phase 3 | Pending |
+| INF-01 | Phase 2 | Pending |
+| INF-02 | Phase 2 | Pending |
+| INF-03 | Phase 2 | Pending |
+| INF-04 | Phase 2 | Pending |
+| VIS-01 | Phase 4 | Pending |
+| VIS-02 | Phase 4 | Pending |
+| VIS-03 | Phase 4 | Pending |
+| VIS-04 | Phase 4 | Pending |
+| VIS-05 | Phase 4 | Pending |
+| FE-01 | Phase 3 | Pending |
+| FE-02 | Phase 3 | Pending |
+| FE-03 | Phase 3 | Pending |
+| EDU-01 | Phase 1 | Pending |
+| EDU-02 | Phase 1 | Pending |
+| EDU-03 | Phase 1 | Pending |
+| EDU-04 | Phase 1 | Pending |
+| EDU-05 | Phase 1 | Pending |
+| EDU-06 | Phase 1 | Pending |
+| BE-01 | Phase 2 | Pending |
+| BE-02 | Phase 2 | Pending |
+| BE-03 | Phase 2 | Pending |
 
 **Coverage:**
 - v1 requirements: 23 total
-- Mapped to phases: 0
-- Unmapped: 23 ⚠️
+- Mapped to phases: 23
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-09*
-*Last updated: 2026-03-09 after initial definition*
+*Last updated: 2026-03-09 after roadmap creation*
