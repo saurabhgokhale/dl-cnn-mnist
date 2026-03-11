@@ -4,6 +4,28 @@ An interactive educational tool that lets you see inside a Convolutional Neural 
 
 **Live demo:** Runs entirely in the browser using TensorFlow.js — no backend required.
 
+## Screenshots
+
+### Main Visualizer
+Digit selection, prediction, confidence chart, architecture diagram, and layer-by-layer activations.
+
+![Main Visualizer](https://github.com/user-attachments/assets/0fe6a33a-8c24-4783-a14c-3bd2d80945f7)
+
+### Draw Your Own Digit
+Freehand canvas with real-time classification and activation visualization.
+
+![Draw Your Own Digit](https://github.com/user-attachments/assets/34ee6acc-4621-4f5a-a3c8-f936f1f5bc68)
+
+### Animated Data Flow
+Step-by-step animation showing data transforming through each CNN layer.
+
+![Animated Data Flow](https://github.com/user-attachments/assets/3d4babef-0b6d-4e9f-a107-6998d5606422)
+
+### Algorithm Walkthrough
+Detailed explanation of how the CNN algorithm works with annotated diagrams.
+
+![Algorithm Walkthrough](https://github.com/user-attachments/assets/0af308c0-c14a-4182-9372-cb52ca2f50ac)
+
 ## Features
 
 - **Interactive digit classification** — Pick any digit (0-9) or load a random MNIST sample and watch the CNN predict it in real time
