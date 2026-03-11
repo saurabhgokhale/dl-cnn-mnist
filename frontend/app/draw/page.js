@@ -19,6 +19,22 @@ export default function DrawPage() {
   const [error, setError] = useState(null);
   const [brushSize, setBrushSize] = useState(16);
   const lastPos = useRef(null);
+  const inferenceRef = useRef(null);
+
+  // Load browser inference model
+  useEffect(() => {
+    async function init() {
+      try {
+        const mod = await import("../lib/inference");
+        await mod.loadModel();
+        inferenceRef.current = mod;
+      } catch (err) {
+        console.warn("Browser inference unavailable:", err);
+        // Will fall back to API
+      }
+    }
+    init();
+  }, []);
 
   // Initialize canvas with black background
   useEffect(() => {
@@ -100,14 +116,68 @@ export default function DrawPage() {
   }, []);
 
   const getPixels = useCallback(() => {
-    // Downsample canvas to 28x28
+    // Step 1: Get the raw canvas pixels to find the bounding box of the drawing
+    const srcCtx = canvasRef.current.getContext("2d");
+    const srcData = srcCtx.getImageData(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    const src = srcData.data;
+
+    // Find bounding box of non-black pixels
+    let minX = CANVAS_SIZE, minY = CANVAS_SIZE, maxX = 0, maxY = 0;
+    for (let y = 0; y < CANVAS_SIZE; y++) {
+      for (let x = 0; x < CANVAS_SIZE; x++) {
+        const i = (y * CANVAS_SIZE + x) * 4;
+        if (src[i] > 20) { // threshold to ignore near-black antialiasing
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+        }
+      }
+    }
+
+    // If nothing drawn, return blank
+    if (maxX <= minX || maxY <= minY) {
+      return new Array(GRID * GRID).fill(0);
+    }
+
+    // Step 2: Crop to bounding box, then fit into 20x20 area (MNIST standard)
+    // MNIST digits are ~20x20 centered in the 28x28 grid with ~4px padding
+    const bboxW = maxX - minX + 1;
+    const bboxH = maxY - minY + 1;
+
+    // Create a square crop (use the larger dimension)
+    const cropSize = Math.max(bboxW, bboxH);
+    // Add 30% padding around the digit (mimics MNIST preprocessing)
+    const padded = Math.round(cropSize * 1.3);
+
+    const cropCx = (minX + maxX) / 2;
+    const cropCy = (minY + maxY) / 2;
+
+    // Step 3: Draw the cropped, centered digit into a 28x28 canvas
     const offscreen = document.createElement("canvas");
     offscreen.width = GRID;
     offscreen.height = GRID;
     const ctx = offscreen.getContext("2d");
+
+    // Black background
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(0, 0, GRID, GRID);
+
+    // Draw the source region centered in the 28x28 grid
+    // Map from source coords to destination coords
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(canvasRef.current, 0, 0, GRID, GRID);
+    ctx.drawImage(
+      canvasRef.current,
+      cropCx - padded / 2, // source x
+      cropCy - padded / 2, // source y
+      padded,              // source width
+      padded,              // source height
+      0,                   // dest x
+      0,                   // dest y
+      GRID,                // dest width
+      GRID,                // dest height
+    );
 
     const imageData = ctx.getImageData(0, 0, GRID, GRID);
     const pixels = [];
@@ -122,6 +192,16 @@ export default function DrawPage() {
     setError(null);
     try {
       const pixels = getPixels();
+
+      // Try browser inference first
+      if (inferenceRef.current) {
+        const data = inferenceRef.current.runInference(pixels);
+        data.true_label = null;
+        setResult(data);
+        return;
+      }
+
+      // Fall back to API
       const res = await fetch(`${API_BASE}/api/predict-drawing`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -131,7 +211,7 @@ export default function DrawPage() {
       const data = await res.json();
       setResult(data);
     } catch {
-      setError("Could not reach the backend. Make sure the server is running on port 8000.");
+      setError("Could not classify. Make sure the server is running or reload the page.");
     } finally {
       setLoading(false);
     }

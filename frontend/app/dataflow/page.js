@@ -185,7 +185,26 @@ export default function DataFlowPage() {
   const [error, setError] = useState(null);
   const [activeStep, setActiveStep] = useState(-1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [ready, setReady] = useState(false);
   const timerRef = useRef(null);
+  const inferenceRef = useRef(null);
+
+  // Load browser inference model
+  useEffect(() => {
+    async function init() {
+      try {
+        const mod = await import("../lib/inference");
+        await mod.loadModel();
+        await mod.loadSamples();
+        inferenceRef.current = mod;
+      } catch (err) {
+        console.warn("Browser inference unavailable:", err);
+        // Will fall back to API
+      }
+      setReady(true);
+    }
+    init();
+  }, []);
 
   const fetchDigit = useCallback(async (digit = null) => {
     setLoading(true);
@@ -194,6 +213,14 @@ export default function DataFlowPage() {
     setIsPlaying(false);
     if (timerRef.current) clearInterval(timerRef.current);
     try {
+      // Try browser inference first
+      if (inferenceRef.current) {
+        const data = await inferenceRef.current.randomPredict(digit);
+        setResult(data);
+        return;
+      }
+
+      // Fall back to API
       let url = `${API_BASE}/api/random-predict`;
       if (digit !== null) url += `?digit=${digit}`;
       const res = await fetch(url);
@@ -201,15 +228,16 @@ export default function DataFlowPage() {
       const data = await res.json();
       setResult(data);
     } catch {
-      setError("Could not reach the backend. Make sure the server is running on port 8000.");
+      setError("Could not load. Make sure the server is running or reload the page.");
     } finally {
       setLoading(false);
     }
   }, []);
 
+  // Fetch first digit only after model init completes
   useEffect(() => {
-    fetchDigit();
-  }, [fetchDigit]);
+    if (ready) fetchDigit();
+  }, [ready, fetchDigit]);
 
   // Cleanup timer on unmount
   useEffect(() => {

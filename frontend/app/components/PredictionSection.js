@@ -1,6 +1,6 @@
 export default function PredictionSection({ result, loading }) {
   return (
-    <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:min-w-[200px]">
+    <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <h2 className="text-xl font-semibold mb-4">Prediction</h2>
 
       {loading && !result ? (
@@ -28,7 +28,7 @@ export default function PredictionSection({ result, loading }) {
             <summary className="text-sm text-accent-600 cursor-pointer">
               What am I seeing?
             </summary>
-            <p className="text-sm text-gray-500 mt-1">
+            <p className="text-base text-gray-500 mt-1 max-w-xs">
               The CNN analyzed the pixel patterns in the image and predicted
               which digit (0-9) it most likely represents. The confidence
               percentage shows how certain the model is about its prediction.

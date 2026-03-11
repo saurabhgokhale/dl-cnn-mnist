@@ -69,7 +69,7 @@ export default function ImageSection({ result, loading, onFetchDigit, onFetchRan
         <summary className="text-sm text-accent-600 cursor-pointer">
           What am I seeing?
         </summary>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-base text-gray-500 mt-1">
           This is a 28x28 pixel handwritten digit from the MNIST dataset, scaled
           up to 180px to show the pixel grid. Each pixel is a grayscale value
           from 0 (black) to 255 (white).
