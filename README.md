@@ -81,35 +81,62 @@ mnist/
 └── requirements.txt
 ```
 
-## Quick Start
+## Running the Application
 
-### Frontend only (recommended)
+The app has two parts: a **Python backend** (FastAPI) that runs the CNN model and a **Next.js frontend** that displays the visualizations. Both must be running simultaneously.
 
-No Python or backend needed. The model runs entirely in the browser via TensorFlow.js.
+### Prerequisites
+
+- conda `ml` environment (Python 3.9.7 with TensorFlow 2.19, FastAPI, Pillow, etc.)
+- Node.js 18+ and npm
+- MNIST dataset at `~/Downloads/mnist.pkl.gz` ([Nielsen format](https://github.com/mnielsen/neural-networks-and-deep-learning))
+
+### 1. Backend (Terminal 1)
+
+```bash
+# From the project root
+.venv/bin/python -m uvicorn backend.main:app --reload --port 8000
+```
+
+The backend loads the trained CNN model and MNIST test data at startup. Once running:
+
+- API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+- Health check: [http://localhost:8000/api/health](http://localhost:8000/api/health)
+- Random prediction: [http://localhost:8000/api/random-predict](http://localhost:8000/api/random-predict)
+- Filter by digit: [http://localhost:8000/api/random-predict?digit=7](http://localhost:8000/api/random-predict?digit=7)
+
+**Verify it works:**
+
+```bash
+curl -s http://localhost:8000/api/random-predict | python3 -c "
+import sys, json
+r = json.load(sys.stdin)
+print(f'Prediction: {r[\"prediction\"]}')
+print(f'True label: {r[\"true_label\"]}')
+print(f'Confidence scores: {len(r[\"confidence\"])}')
+print(f'Activation layers: {len(r[\"activations\"])}')
+"
+```
+
+### 2. Frontend (Terminal 2)
 
 ```bash
 cd frontend
-npm install
+npm install    # first time only
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000). The frontend calls the backend at `localhost:8000`.
 
-### With backend (optional)
+### API Endpoints
 
-The backend enables the trained weights visualization section. All other features work without it.
-
-```bash
-# Terminal 1 — backend
-pip install -r requirements.txt
-pip install fastapi uvicorn
-uvicorn backend.main:app --reload
-
-# Terminal 2 — frontend
-cd frontend
-npm install
-npm run dev
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Server liveness check |
+| GET | `/api/random-predict` | Random MNIST image + full inference result |
+| GET | `/api/random-predict?digit=N` | Random image of a specific digit (0-9) |
+| POST | `/api/predict-drawing` | Inference on a user-drawn 28x28 image |
+| GET | `/api/weights` | Trained filter kernels and weight matrices |
 
 ## Deploy to Vercel
 
