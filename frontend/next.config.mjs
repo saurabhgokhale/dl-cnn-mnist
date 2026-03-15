@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   // Use webpack instead of Turbopack — @tensorflow/tfjs has compatibility
   // issues with Turbopack's module resolution.
   webpack: (config, { isServer }) => {
